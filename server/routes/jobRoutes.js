@@ -1,15 +1,22 @@
+
 const express = require('express');
 const router = express.Router();
-const { createJob, getJobs, getJobById } = require('../controllers/jobController');
+const { createJob, getJobs, getJobById, updateJob, deleteJob } = require('../controllers/jobController');
 const { protect } = require('../middleware/authMiddleware');
 
-// Route to create a job posting (protected)
+// Create a job posting (protected)
 router.post('/', protect, createJob);
 
-// Route to get all job postings (public)
+// Get all job postings (public)
 router.get('/', getJobs);
 
-// Route to get a specific job posting by ID (public)
+// Get a specific job posting by ID (public)
 router.get('/:id', getJobById);
+
+// Update a job posting (protected)
+router.put('/:id', protect, updateJob);
+
+// Delete a job posting (protected)
+router.delete('/:id', protect, deleteJob);
 
 module.exports = router;
